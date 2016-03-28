@@ -1,0 +1,25 @@
+{
+  "name": "service_js",
+  "version": "1.0.0",
+  "description": "Service utils to register or request for service",
+  "main": "registry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeReunionais/service_js.git"
+  },
+  "author": "LeReunionais",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeReunionais/service_js/issues"
+  },
+  "homepage": "https://github.com/LeReunionais/service_js#readme",
+  "dependencies": {
+    "bunyan": "^1.8.0",
+    "jsonrpc-lite": "^1.1.0",
+    "node-uuid": "^1.4.7",
+    "zmq": "^2.14.0"
+  }
+}
