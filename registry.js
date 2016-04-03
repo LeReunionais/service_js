@@ -4,7 +4,7 @@ const TIMEOUT = 3000
 	, MAX_RETRIES = 3;
 
 var bunyan = require('bunyan')
-	, log = bunyan.createLogger({name: "blog/registry"})
+	, log = bunyan.createLogger({name: "service_js"})
 ;
 
 var zmq = require('zmq')
