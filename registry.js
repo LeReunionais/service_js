@@ -1,7 +1,6 @@
 'use strict';
-
 const TIMEOUT = 3000
-	, MAX_RETRIES = 3;
+		, MAX_RETRIES = 3;
 
 var bunyan = require('bunyan')
 	, log = bunyan.createLogger({name: "service_js"})
@@ -57,26 +56,24 @@ function whereis(service, registryHost, attempt) {
 		const endpoint = `tcp://${registryHost}:3002`;
 		pushSocket.connect(endpoint);
 		log.info("Connected to %s", endpoint);
-		const whereisObj = {
-			service: {
-				name: service
-			}
-		}
-		const whereisMsg = jsonrpc.request(uuid.v4(), "find", whereisObj);
+		const whereisMsg = jsonrpc.request(uuid.v4(), "find", service);
 		log.info({request:whereisMsg}, "sent request");
 		pushSocket.send(JSON.stringify(whereisMsg));
+
 		var timeout = setTimeout( () => {
 			pushSocket.close();
 			const err = "Timeout. No response after: " + TIMEOUT + "ms"
 			reject(err);
 		}, TIMEOUT);
+
 		pushSocket.on("message", (msg) => {
 			pushSocket.close();
 			clearTimeout(timeout);
 			log.info({request:msg.toString()}, "reply");
 			const serviceObj = JSON.parse(msg.toString());
-			resolve(serviceObj);
+			resolve(serviceObj.result);
 		});
+
 		pushSocket.on("error", (err) => {
 			pushSocket.close();
 			clearTimeout(timeout);
